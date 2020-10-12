@@ -1,8 +1,5 @@
-import Unique from "./Unique.js"
-import Utility from "./utility.js"
-
-import express from 'express'
-import AWS from 'aws-sdk'
+const express = require('express')
+const AWS = require('aws-sdk')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,7 +12,6 @@ AWS.config.update({
 
 var dynamodb = new AWS.DynamoDB.DocumentClient();
 
-Utility.Init();
 
 
 app.get('/', (req, res) => {
@@ -71,7 +67,7 @@ app.put('/todo/:title', (req, res) => {
         res.send("title can not be empty").status(200).end();
     }
     else {
-        var uid = Unique.UUID();
+        var uid = UUID();
         var params = {
             TableName: "Todo",
             Item: {
@@ -95,3 +91,14 @@ app.put('/todo/:title', (req, res) => {
 });
 
 
+Date.prototype.formate = function (str = '-') {
+    str = str || "-";
+    return new Date().toISOString().slice(0, 10).replace(/-/g, str);
+}
+
+function UUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
