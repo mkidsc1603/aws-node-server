@@ -1,5 +1,5 @@
-import Unique from "./src/Unique.js"
-import Utility from "./src/utility.js"
+import Unique from "./Unique.js"
+import Utility from "./utility.js"
 
 import express from 'express'
 import AWS from 'aws-sdk'
