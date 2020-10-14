@@ -2,4 +2,4 @@
 //     presets: [ 'es2015' ]
 //  });
  
- require('./src/server.js');
+ require('./server.js');

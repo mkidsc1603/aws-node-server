@@ -1,6 +1,6 @@
 const express = require('express')
 const AWS = require('aws-sdk')
-
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -13,9 +13,10 @@ AWS.config.update({
 var dynamodb = new AWS.DynamoDB.DocumentClient();
 
 
+app.use(express.static(__dirname + '/web'));
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.sendFile(path.join(__dirname + '/web/index.html'));
 })
 
 app.listen(port, () => {
